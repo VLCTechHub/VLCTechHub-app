@@ -1,0 +1,57 @@
+import React from "react";
+import { connect } from "react-redux";
+import { ScrollView, ActivityIndicator } from "react-native";
+import { getJobs } from "../../selectors";
+
+import CenteredView from "../../components/CenteredView";
+import Job from "../../components/Job";
+
+import { loadJobs } from "../../actions/jobs";
+
+class JobsScreen extends React.Component {
+  componentDidMount() {
+    this.props.dispatchLoadJobs();
+  }
+
+  jobSelectedHandler(job) {
+    this.props.navigation.navigate("JobDetail", { job });
+  }
+
+  render() {
+    if (!this.props.jobs) {
+      return (
+        <CenteredView>
+          <ActivityIndicator />
+        </CenteredView>
+      );
+    }
+    return (
+      <ScrollView onResponderMove={evt => console.log(evt.nativeEvent)}>
+        {this.props.jobs.map(job => (
+          <Job
+            key={job.id}
+            job={job}
+            handleClick={() => this.jobSelectedHandler(job)}
+          />
+        ))}
+      </ScrollView>
+    );
+  }
+}
+
+function mapStateToProps(state) {
+  return {
+    jobs: getJobs(state.jobs)
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatchLoadJobs: () => dispatch(loadJobs())
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(JobsScreen);
