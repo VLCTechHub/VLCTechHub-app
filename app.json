@@ -1,5 +1,11 @@
 {
   "expo": {
-    "sdkVersion": "27.0.0"
+    "sdkVersion": "27.0.0",
+    "name": "VLCTechHub app",
+    "slug": "vlctechhub-app",
+    "privacy": "public",
+    "description": "React Native app consuming the VLCTechHub API",
+    "version": "0.1.0",
+    "githubUrl": "https://github.com/marcelkalveram/vlctechhub-app"
   }
 }
