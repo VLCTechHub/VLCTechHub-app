@@ -1,9 +1,13 @@
 import React from "react";
-import { ScrollView, Button, Linking } from "react-native";
+import { ScrollView, TouchableHighlight, Text, Linking } from "react-native";
 import { DetailView, Title, Description } from "../../components/Content";
 import { Meta } from "../../components/Content";
 
 export default class JobDetailScreen extends React.Component {
+  static navigationOptions = {
+    headerTintColor: "#000000",
+    headerStyle: { backgroundColor: "#FDD951" }
+  };
   buttonPressHandler(job) {
     Linking.openURL(job.link);
   }
@@ -19,10 +23,19 @@ export default class JobDetailScreen extends React.Component {
           <Title>{job.title}</Title>
           <Meta>{job.company.name}</Meta>
           <Description>{job.description}</Description>
-          <Button
-            title="Más información"
-            onPress={() => this.buttonPressHandler(job)}
-          />
+          <TouchableHighlight
+            style={{
+              backgroundColor: "#FDD951",
+              borderRadius: 16,
+              padding: 16,
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: 16
+            }}
+            onPress={() => this.buttonPressHandler(event)}
+          >
+            <Text>Más información</Text>
+          </TouchableHighlight>
         </DetailView>
       </ScrollView>
     );

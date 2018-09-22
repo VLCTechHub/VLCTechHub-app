@@ -26,7 +26,10 @@ class EventsScreen extends React.Component {
       );
     }
     return (
-      <ScrollView onResponderMove={evt => console.log(evt.nativeEvent)}>
+      <ScrollView
+        style={{ backgroundColor: "#FFF" }}
+        onResponderMove={evt => console.log(evt.nativeEvent)}
+      >
         {this.props.events.map(event => (
           <Event
             key={event.id}

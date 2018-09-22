@@ -27,7 +27,13 @@ const Tabs = createBottomTabNavigator(
         }
         return <Feather name={iconName} size={25} color={tintColor} />;
       }
-    })
+    }),
+    tabBarOptions: {
+      activeBackgroundColor: "#FDD951",
+      inactiveBackgroundColor: "#FDD951",
+      activeTintColor: "#000000",
+      inactiveTintColor: "#CBA81F"
+    }
   }
 );
 
@@ -36,8 +42,10 @@ export default createStackNavigator({
     screen: Tabs,
     navigationOptions: ({ navigation }) => {
       return {
-        title: "VlcTechHub",
-        headerBackTitle: "Back"
+        title: "Valencia Tech Hub",
+        headerBackTitle: "Back",
+        headerTintColor: "#000000",
+        headerStyle: { backgroundColor: "#FDD951" }
       };
     }
   },
