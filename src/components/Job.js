@@ -1,24 +1,40 @@
 import React from "react";
-import { TouchableHighlight } from "react-native";
+import { ScrollView, TouchableHighlight, Dimensions } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import moment from "moment";
 
 import { Item, ItemData } from "./Item";
-import { Meta, TitleSmall } from "./Content";
+import { Meta, Subtitle, Tags, Tag, TagText } from "./Content";
+
+import GLOBALS from "../constants/styles";
 
 export default props => {
-  //   const date = moment(props.event.date).format("dddd, MMMM Do YYYY, h:mm a");
+  var { width } = Dimensions.get("window");
   return (
-    <TouchableHighlight onPress={props.handleClick}>
-      <Item>
-        <Feather name="briefcase" size={25} />
-        <ItemData>
-          <TitleSmall ellipsizeMode="tail" numberOfLines={1}>
+    <Item>
+      <Feather
+        name="briefcase"
+        size={25}
+        style={{ color: GLOBALS.COLORS.GREY_LIGHT }}
+      />
+      <ItemData>
+        <Meta>{props.job.company.name}</Meta>
+        <TouchableHighlight onPress={props.handleClick}>
+          <Subtitle ellipsizeMode="tail" numberOfLines={1}>
             {props.job.title}
-          </TitleSmall>
-          <Meta>{props.job.company.name}</Meta>
-        </ItemData>
-      </Item>
-    </TouchableHighlight>
+          </Subtitle>
+        </TouchableHighlight>
+        <ScrollView
+          style={{ width: width - 50 }}
+          directionalLockEnabled={true}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+        >
+          <Tags>
+            {props.job.tags &&
+              props.job.tags.map((tag, index) => <Tag key={index}>{tag}</Tag>)}
+          </Tags>
+        </ScrollView>
+      </ItemData>
+    </Item>
   );
 };

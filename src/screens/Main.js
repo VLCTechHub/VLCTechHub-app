@@ -10,6 +10,8 @@ import JobsScreen from "./jobs/JobsScreen";
 import EventDetailScreen from "./eventDetail/EventDetailScreen";
 import JobDetailScreen from "./jobDetail/JobDetailScreen";
 
+import STYLES from "../constants/styles";
+
 const Tabs = createBottomTabNavigator(
   {
     Events: EventsScreen,
@@ -29,10 +31,10 @@ const Tabs = createBottomTabNavigator(
       }
     }),
     tabBarOptions: {
-      activeBackgroundColor: "#FDD951",
-      inactiveBackgroundColor: "#FDD951",
-      activeTintColor: "#000000",
-      inactiveTintColor: "#CBA81F"
+      activeBackgroundColor: STYLES.COLORS.PRIMARY,
+      inactiveBackgroundColor: STYLES.COLORS.PRIMARY,
+      activeTintColor: STYLES.COLORS.BLACK,
+      inactiveTintColor: STYLES.COLORS.PRIMARY_DARK
     }
   }
 );
@@ -44,8 +46,8 @@ export default createStackNavigator({
       return {
         title: "Valencia Tech Hub",
         headerBackTitle: "Back",
-        headerTintColor: "#000000",
-        headerStyle: { backgroundColor: "#FDD951" }
+        headerTintColor: STYLES.COLORS.BLACK,
+        headerStyle: { backgroundColor: STYLES.COLORS.PRIMARY }
       };
     }
   },

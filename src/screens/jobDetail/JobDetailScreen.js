@@ -1,12 +1,18 @@
 import React from "react";
 import { ScrollView, TouchableHighlight, Text, Linking } from "react-native";
-import { DetailView, Title, Description } from "../../components/Content";
-import { Meta } from "../../components/Content";
-
+import {
+  DetailView,
+  Title,
+  Description,
+  Subtitle,
+  Callout
+} from "../../components/Content";
+import Button from "../../components/Button";
+import STYLES from "../../constants/styles";
 export default class JobDetailScreen extends React.Component {
   static navigationOptions = {
-    headerTintColor: "#000000",
-    headerStyle: { backgroundColor: "#FDD951" }
+    headerTintColor: STYLES.COLORS.BLACK,
+    headerStyle: { backgroundColor: STYLES.COLORS.PRIMARY }
   };
   buttonPressHandler(job) {
     Linking.openURL(job.link);
@@ -14,28 +20,17 @@ export default class JobDetailScreen extends React.Component {
 
   render() {
     const job = this.props.navigation.getParam("job");
-    console.log(job);
-    // const date = moment(job.date).format("dddd, MMMM Do YYYY, h:mm a");
 
     return (
-      <ScrollView>
+      <ScrollView style={{ backgroundColor: STYLES.COLORS.WHITE }}>
         <DetailView>
           <Title>{job.title}</Title>
-          <Meta>{job.company.name}</Meta>
+          <Subtitle>{job.company.name}</Subtitle>
+          <Callout>{job.salary}</Callout>
           <Description>{job.description}</Description>
-          <TouchableHighlight
-            style={{
-              backgroundColor: "#FDD951",
-              borderRadius: 16,
-              padding: 16,
-              justifyContent: "center",
-              alignItems: "center",
-              marginTop: 16
-            }}
-            onPress={() => this.buttonPressHandler(event)}
-          >
-            <Text>Más información</Text>
-          </TouchableHighlight>
+          <Button onPress={() => this.buttonPressHandler(job)}>
+            Más información
+          </Button>
         </DetailView>
       </ScrollView>
     );

@@ -1,13 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
-import { ScrollView, TouchableHighlight, Text, Linking } from "react-native";
+import { ScrollView, Linking } from "react-native";
 import { DetailView, Title, Description, Meta } from "../../components/Content";
+import Button from "../../components/Button";
 import moment from "moment";
+
+import STYLES from "../../constants/styles";
 
 class EventDetailScreen extends React.Component {
   static navigationOptions = {
-    headerTintColor: "#000000",
-    headerStyle: { backgroundColor: "#FDD951" }
+    headerTintColor: STYLES.COLORS.BLACK,
+    headerStyle: { backgroundColor: STYLES.COLORS.PRIMARY }
   };
 
   buttonPressHandler(event) {
@@ -23,19 +26,9 @@ class EventDetailScreen extends React.Component {
           <Title>{event.title}</Title>
           <Meta>{date}</Meta>
           <Description>{event.description}</Description>
-          <TouchableHighlight
-            style={{
-              backgroundColor: "#FDD951",
-              borderRadius: 16,
-              padding: 16,
-              justifyContent: "center",
-              alignItems: "center",
-              marginTop: 16
-            }}
-            onPress={() => this.buttonPressHandler(event)}
-          >
-            <Text>Más información</Text>
-          </TouchableHighlight>
+          <Button onPress={() => this.buttonPressHandler(event)}>
+            Más información
+          </Button>
         </DetailView>
       </ScrollView>
     );

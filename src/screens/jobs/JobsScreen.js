@@ -5,6 +5,7 @@ import { getJobs } from "../../selectors";
 
 import CenteredView from "../../components/CenteredView";
 import Job from "../../components/Job";
+import STYLES from "../../constants/styles";
 
 import { loadJobs } from "../../actions/jobs";
 
@@ -26,7 +27,7 @@ class JobsScreen extends React.Component {
       );
     }
     return (
-      <ScrollView onResponderMove={evt => console.log(evt.nativeEvent)}>
+      <ScrollView style={{ backgroundColor: STYLES.COLORS.WHITE }}>
         {this.props.jobs.map(job => (
           <Job
             key={job.id}

@@ -5,6 +5,7 @@ import { getEvents } from "../../selectors";
 
 import CenteredView from "../../components/CenteredView";
 import Event from "../../components/Event";
+import STYLES from "../../constants/styles";
 
 import { loadEvents } from "../../actions/events";
 
@@ -26,10 +27,7 @@ class EventsScreen extends React.Component {
       );
     }
     return (
-      <ScrollView
-        style={{ backgroundColor: "#FFF" }}
-        onResponderMove={evt => console.log(evt.nativeEvent)}
-      >
+      <ScrollView style={{ backgroundColor: STYLES.COLORS.WHITE }}>
         {this.props.events.map(event => (
           <Event
             key={event.id}

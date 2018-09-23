@@ -1,7 +1,12 @@
-import styled from 'styled-components';
+import React from "react";
+import { View } from "react-native";
 
-export default CenteredView = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`;
+export default () => (
+  <View
+    style={{
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center"
+    }}
+  />
+);
