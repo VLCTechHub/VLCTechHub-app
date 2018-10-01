@@ -10,7 +10,7 @@ import GLOBALS from "../constants/styles";
 export default props => {
   var { width } = Dimensions.get("window");
   return (
-    <Item>
+    <Item white={props.index % 2 === 0}>
       <Feather
         name="briefcase"
         size={25}
@@ -31,7 +31,7 @@ export default props => {
         >
           <Tags>
             {props.job.tags &&
-              props.job.tags.map((tag, index) => <Tag key={index}>{tag}</Tag>)}
+              props.job.tags.map((tag, index) => <Tag key={index} last={index === (props.job.tags.length - 1)}>{tag}</Tag>)}
           </Tags>
         </ScrollView>
       </ItemData>

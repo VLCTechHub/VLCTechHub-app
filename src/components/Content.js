@@ -16,8 +16,10 @@ export const Title = props => (
 
 export const Subtitle = props => (
   <Text
+    {...props}
     style={{
       fontSize: STYLES.FONTS.SUBTITLE,
+      fontWeight: "600",
       lineHeight: STYLES.LINE_HEIGHT,
       color: STYLES.COLORS.GREY
     }}
@@ -65,10 +67,11 @@ export const Tags = props => (
 export const Tag = props => (
   <View
     style={{
-      marginRight: STYLES.SPACING.MINOR,
       marginBottom: STYLES.SPACING.MINOR,
-      backgroundColor: STYLES.COLORS.GREY_LIGHTER,
-      borderRadius: 12,
+      borderRightWidth: props.last ? 0 : 1,
+      borderRightColor: STYLES.COLORS.GREY_LIGHTER,
+      marginRight: STYLES.SPACING.MINOR,
+      paddingRight: STYLES.SPACING.MINOR,
       justifyContent: "center",
       flexDirection: "column"
     }}
@@ -76,9 +79,7 @@ export const Tag = props => (
     <Text
       style={{
         fontSize: STYLES.FONTS.TEXT,
-        color: STYLES.COLORS.BLACK,
-        lineHeight: 32,
-        paddingHorizontal: STYLES.SPACING.MINOR
+        color: STYLES.COLORS.GREY_LIGHT,
       }}
     >
       {props.children}

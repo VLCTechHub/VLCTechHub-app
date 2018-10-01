@@ -28,10 +28,11 @@ class JobsScreen extends React.Component {
     }
     return (
       <ScrollView style={{ backgroundColor: STYLES.COLORS.WHITE }}>
-        {this.props.jobs.map(job => (
+        {this.props.jobs.map((job, index) => (
           <Job
             key={job.id}
             job={job}
+            index={index}
             handleClick={() => this.jobSelectedHandler(job)}
           />
         ))}

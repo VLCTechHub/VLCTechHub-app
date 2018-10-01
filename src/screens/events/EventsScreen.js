@@ -28,10 +28,11 @@ class EventsScreen extends React.Component {
     }
     return (
       <ScrollView style={{ backgroundColor: STYLES.COLORS.WHITE }}>
-        {this.props.events.map(event => (
+        {this.props.events.map((event, index) => (
           <Event
             key={event.id}
             event={event}
+            index={index}
             handleClick={() => this.eventSelectedHandler(event)}
           />
         ))}

@@ -4,18 +4,19 @@ import { Feather } from "@expo/vector-icons";
 import moment from "moment";
 
 import { Item, ItemData } from "./Item";
-import { Meta, Subtitle } from "./Content";
+import { Meta, Subtitle, Tags, Tag } from "./Content";
 
 import STYLES from "../constants/styles";
 
 export default props => {
   const date = moment(props.event.date).format("dddd, MMMM Do YYYY, h:mm a");
+  console.log(props);
   return (
     <TouchableHighlight
       onPress={props.handleClick}
       underlayColor={STYLES.COLORS.GREY_LIGHTER}
     >
-      <Item>
+      <Item white={props.index % 2 === 0}>
         <Feather
           name="calendar"
           size={25}
@@ -23,7 +24,11 @@ export default props => {
         />
         <ItemData>
           <Meta>{date}</Meta>
-          <Subtitle>{props.event.title}</Subtitle>
+          <Subtitle ellipsizeMode="tail" numberOfLines={1}>{props.event.title}</Subtitle>
+          <Tags>
+            {props.event.hashtag &&
+              <Tag last>{props.event.hashtag}</Tag>}
+          </Tags>
         </ItemData>
       </Item>
     </TouchableHighlight>

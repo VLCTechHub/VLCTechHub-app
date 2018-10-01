@@ -6,8 +6,9 @@ export const Item = props => (
   <View
     style={{
       width: STYLES.WIDTH,
-      borderBottomWidth: 1,
-      borderBottomColor: STYLES.COLORS.GREY_LIGHTER,
+      // borderBottomWidth: 1,
+      // borderBottomColor: STYLES.COLORS.GREY_LIGHTER,
+      backgroundColor: props.white ? STYLES.COLORS.WHITE : STYLES.COLORS.GREY_LIGHTEST,
       flex: 1,
       flexDirection: "row",
       justifyContent: "center",
