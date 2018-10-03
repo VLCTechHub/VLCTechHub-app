@@ -1,1 +1,1 @@
-export default API_URI = 'https://api.vlctechhub.org/v1';
+export default (API_URI = "https://api.vlctechhub.org/v1")

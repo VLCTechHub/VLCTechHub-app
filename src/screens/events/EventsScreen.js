@@ -1,59 +1,59 @@
-import React from "react";
-import { connect } from "react-redux";
-import { ScrollView, ActivityIndicator } from "react-native";
-import { getEvents } from "../../selectors";
+import React from "react"
+import { connect } from "react-redux"
+import { ScrollView, ActivityIndicator } from "react-native"
+import { getEvents } from "../../selectors"
 
-import CenteredView from "../../components/CenteredView";
-import Event from "../../components/Event";
-import STYLES from "../../constants/styles";
+import CenteredView from "../../components/CenteredView"
+import Event from "../../components/Event"
+import STYLES from "../../constants/styles"
 
-import { loadEvents } from "../../actions/events";
+import { loadEvents } from "../../actions/events"
 
 class EventsScreen extends React.Component {
-  componentDidMount() {
-    this.props.dispatchLoadEvents();
-  }
+	componentDidMount() {
+		this.props.dispatchLoadEvents()
+	}
 
-  eventSelectedHandler(event) {
-    this.props.navigation.navigate("EventDetail", { event });
-  }
+	eventSelectedHandler(event) {
+		this.props.navigation.navigate("EventDetail", { event })
+	}
 
-  render() {
-    if (!this.props.events) {
-      return (
-        <CenteredView>
-          <ActivityIndicator />
-        </CenteredView>
-      );
-    }
-    return (
-      <ScrollView style={{ backgroundColor: STYLES.COLORS.WHITE }}>
-        {this.props.events.map((event, index) => (
-          <Event
-            key={event.id}
-            event={event}
-            index={index}
-            handleClick={() => this.eventSelectedHandler(event)}
-          />
-        ))}
-      </ScrollView>
-    );
-  }
+	render() {
+		if (!this.props.events) {
+			return (
+				<CenteredView>
+					<ActivityIndicator />
+				</CenteredView>
+			)
+		}
+		return (
+			<ScrollView style={{ backgroundColor: STYLES.COLORS.WHITE }}>
+				{this.props.events.map((event, index) => (
+					<Event
+						key={event.id}
+						event={event}
+						index={index}
+						handleClick={() => this.eventSelectedHandler(event)}
+					/>
+				))}
+			</ScrollView>
+		)
+	}
 }
 
 function mapStateToProps(state) {
-  return {
-    events: getEvents(state.events)
-  };
+	return {
+		events: getEvents(state.events),
+	}
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    dispatchLoadEvents: () => dispatch(loadEvents())
-  };
+	return {
+		dispatchLoadEvents: () => dispatch(loadEvents()),
+	}
 }
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EventsScreen);
+	mapStateToProps,
+	mapDispatchToProps,
+)(EventsScreen)
