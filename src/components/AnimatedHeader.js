@@ -1,13 +1,20 @@
 import React from "react"
 import { Constants } from "expo"
-import { Platform, Image, View, Animated, StyleSheet } from "react-native"
+import { Platform, Image, View, TouchableHighlight, Animated, StyleSheet } from "react-native"
 import { HeaderBackButton } from "react-navigation"
+import { Feather } from "@expo/vector-icons"
 
 import STYLES from "../constants/styles"
 
-const toolbarHeight = Platform.OS === "ios" ? 56 : 44 + Constants.statusBarHeight
+const isX = Platform.OS === "ios" && (STYLES.HEIGHT > 800 || STYLES.width > 800) ? true : false
+
+const toolbarHeight = Platform.OS === "android" ? 77 : isX ? 77 : 60
+const titleTranslateValue = Platform.OS === "android" ? 9 : isX ? 14 : 6
+const backButtonTop = Constants.statusBarHeight + (isX ? -12 : 16)
+const externalLinkTop = Constants.statusBarHeight + (Platform.OS === "android" ? 16 : isX ? -3 : 5)
 
 AnimatedHeaderBackButton = Animated.createAnimatedComponent(HeaderBackButton)
+AnimatedFeather = Animated.createAnimatedComponent(Feather)
 
 export default class AnimatedHeader extends React.Component {
 	headerTranslateY = this.props.scrollY.interpolate({
@@ -24,7 +31,7 @@ export default class AnimatedHeader extends React.Component {
 
 	titleTranslateY = this.props.scrollY.interpolate({
 		inputRange: [0, this.props.headerHeight - toolbarHeight],
-		outputRange: [0, -(this.props.headerHeight - toolbarHeight) / 2 + 6],
+		outputRange: [0, -(this.props.headerHeight - toolbarHeight) / 2 + titleTranslateValue],
 		extrapolate: "clamp",
 	})
 
@@ -54,7 +61,7 @@ export default class AnimatedHeader extends React.Component {
 
 	render() {
 		return (
-			<View style={[styles.articleHeader, { height: this.props.headerHeight }]}>
+			<View style={[styles.articleHeaderContainer, { height: this.props.headerHeight }]}>
 				<Animated.View
 					style={[
 						styles.toolbar,
@@ -74,6 +81,15 @@ export default class AnimatedHeader extends React.Component {
 						</View>
 					),
 				})}
+				{this.props.externalLinkPress ? (
+					<TouchableHighlight
+						onPress={this.props.externalLinkPress}
+						style={styles.externalLink}
+						underlayColor="transparent"
+					>
+						<AnimatedFeather style={{ color: this.textColor }} name="external-link" size={24} />
+					</TouchableHighlight>
+				) : null}
 				<Animated.View
 					style={[
 						styles.articleHeader,
@@ -130,6 +146,11 @@ export default class AnimatedHeader extends React.Component {
 }
 
 const styles = StyleSheet.create({
+	articleHeaderContainer: {
+		width: STYLES.WIDTH,
+		position: "absolute",
+		zIndex: 2,
+	},
 	articleHeader: {
 		backgroundColor: "transparent",
 		width: STYLES.WIDTH,
@@ -165,8 +186,15 @@ const styles = StyleSheet.create({
 	backButton: {
 		position: "absolute",
 		zIndex: 4,
-		top: 16 - 2,
+		top: backButtonTop,
 		left: 4,
+		elevation: 4,
+	},
+	externalLink: {
+		position: "absolute",
+		zIndex: 4,
+		top: externalLinkTop,
+		right: 12,
 		elevation: 4,
 	},
 })

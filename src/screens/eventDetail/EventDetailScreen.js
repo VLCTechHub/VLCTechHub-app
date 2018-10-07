@@ -26,13 +26,14 @@ export default class EventDetailScreen extends React.Component {
 		const event = this.props.navigation.getParam("event")
 		const date = dateFormatted(event.date)
 		return (
-			<SafeAreaView>
+			<SafeAreaView style={styles.scrollViewContainer}>
 				<AnimatedHeader
 					headerHeight={headerHeight}
 					scrollY={this.scrollY}
 					headerTitle={event.hashtag}
 					headerImage={require("../../../assets/talk.jpg")}
 					onBackPress={() => this.props.navigation.goBack()}
+					externalLinkPress={event.link && (() => this.buttonPressHandler(event))}
 				/>
 				<Animated.ScrollView
 					style={styles.scrollView}
@@ -53,7 +54,9 @@ export default class EventDetailScreen extends React.Component {
 						<Title>{event.title}</Title>
 						<Subtitle>{date}</Subtitle>
 						<Description>{event.description}</Description>
-						<Button onPress={() => this.buttonPressHandler(event)}>Más información</Button>
+						{event.link ? (
+							<Button onPress={() => this.buttonPressHandler(event)}>Más información</Button>
+						) : null}
 					</DetailView>
 				</Animated.ScrollView>
 			</SafeAreaView>
@@ -62,7 +65,11 @@ export default class EventDetailScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+	scrollViewContainer: {
+		flex: 1,
+	},
 	scrollView: {
+		flex: 1,
 		backgroundColor: STYLES.COLORS.WHITE,
 	},
 	scrollViewContent: {

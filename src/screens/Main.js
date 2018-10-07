@@ -39,6 +39,9 @@ const options = {
 		activeTintColor: STYLES.COLORS.BLACK,
 		inactiveTintColor: STYLES.COLORS.PRIMARY_DARK,
 		backgroundColor: STYLES.COLORS.PRIMARY,
+		style: {
+			backgroundColor: STYLES.COLORS.PRIMARY,
+		},
 	},
 	activeColor: STYLES.COLORS.BLACK,
 	inactiveColor: STYLES.COLORS.PRIMARY_DARK,

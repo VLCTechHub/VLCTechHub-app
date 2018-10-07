@@ -23,13 +23,14 @@ export default class JobDetailScreen extends React.Component {
 		const job = this.props.navigation.getParam("job")
 
 		return (
-			<SafeAreaView>
+			<SafeAreaView style={styles.scrollViewContainer}>
 				<AnimatedHeader
 					headerHeight={headerHeight}
 					scrollY={this.scrollY}
 					headerTitle={job.company.name}
 					headerImage={require("../../../assets/job.jpg")}
 					onBackPress={() => this.props.navigation.goBack()}
+					externalLinkPress={job.link && (() => this.buttonPressHandler(job))}
 				/>
 				<Animated.ScrollView
 					style={styles.scrollView}
@@ -48,9 +49,11 @@ export default class JobDetailScreen extends React.Component {
 				>
 					<DetailView>
 						<Title>{job.title}</Title>
-						<Callout>{job.salary}</Callout>
+						{job.salary ? <Callout>{job.salary}</Callout> : null}
 						<Description>{job.description}</Description>
-						<Button onPress={() => this.buttonPressHandler(job)}>Más información</Button>
+						{job.link ? (
+							<Button onPress={() => this.buttonPressHandler(job)}>Más información</Button>
+						) : null}
 					</DetailView>
 				</Animated.ScrollView>
 			</SafeAreaView>
@@ -59,7 +62,11 @@ export default class JobDetailScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+	scrollViewContainer: {
+		flex: 1,
+	},
 	scrollView: {
+		flex: 1,
 		backgroundColor: STYLES.COLORS.WHITE,
 	},
 	scrollViewContent: {

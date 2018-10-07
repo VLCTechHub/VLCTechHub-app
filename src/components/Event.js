@@ -20,7 +20,7 @@ export default props => {
 					<Subtitle ellipsizeMode="tail" numberOfLines={1}>
 						{props.event.title}
 					</Subtitle>
-					<Tags>{props.event.hashtag && <Tag last>{props.event.hashtag}</Tag>}</Tags>
+					<Tags>{props.event.hashtag ? <Tag last>{props.event.hashtag}</Tag> : null}</Tags>
 				</ItemData>
 			</Item>
 		</TouchableHighlight>
