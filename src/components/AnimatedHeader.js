@@ -10,7 +10,7 @@ const isX = Platform.OS === "ios" && (STYLES.HEIGHT > 800 || STYLES.width > 800)
 
 const toolbarHeight = Platform.OS === "android" ? 77 : isX ? 77 : 60
 const titleTranslateValue = Platform.OS === "android" ? 9 : isX ? 14 : 6
-const backButtonTop = Constants.statusBarHeight + (isX ? -12 : 16)
+const backButtonTop = Constants.statusBarHeight + (isX ? -12 : -2)
 const externalLinkTop = Constants.statusBarHeight + (Platform.OS === "android" ? 16 : isX ? -3 : 5)
 
 AnimatedHeaderBackButton = Animated.createAnimatedComponent(HeaderBackButton)
