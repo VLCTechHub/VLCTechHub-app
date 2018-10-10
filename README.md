@@ -2,11 +2,13 @@
 
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app). Please refer to [its documentation](https://github.com/expo/expo-cli) for more info on the Expo CLI.
 
-If you want to run the app direclty on your device, you can find a public link to the app on Expo: https://expo.io/@marcelkalveram/vlctechhub-app. On Android, you can just scan the QR code. For iOS, you'll have to wait until the app is in the app store as Expo isn't allowed to share apps publicly due to some Apple restrictions.
+If you want to run the app direclty on your device, you can find a public link to the app on Expo: https://expo.io/@marcelkalveram/vlctechhub-app. 
+
+On **Android**, you can just scan the QR code. For **iOS**, you'll have to wait until the app is in the app store as Expo isn't allowed to share apps publicly due to some Apple restrictions.
 
 ## Installing the app
 
-You need the Expo CLI to run the app in the simulator or on a local device. It also contains some commands that give you quick access to
+You need the Expo CLI to run the app in the simulator or on a local device.
 
 ```
 npm install -g expo-cli
