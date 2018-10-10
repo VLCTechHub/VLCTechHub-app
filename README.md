@@ -1,8 +1,8 @@
 # VLCTechHub app
 
-This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app). Please refer to [its documentation](https://github.com/react-community/create-react-native-app) for more info on the Expo CLI.
+This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app). Please refer to [its documentation](https://github.com/expo/expo-cli) for more info on the Expo CLI.
 
-If you want to run the app direclty on your device, you can find a public link to the app on Expo:
+If you want to run the app direclty on your device, you can find a public link to the app on Expo: https://expo.io/@marcelkalveram/vlctechhub-app
 
 ## Installing the app
 
