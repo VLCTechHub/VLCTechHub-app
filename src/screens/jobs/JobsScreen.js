@@ -1,15 +1,20 @@
 import React from "react"
 import { connect } from "react-redux"
-import { ScrollView, ActivityIndicator } from "react-native"
+import { ScrollView, ActivityIndicator, Text } from "react-native"
 import { getJobs } from "../../selectors"
 
 import CenteredView from "../../components/CenteredView"
 import Job from "../../components/Job"
 import STYLES from "../../constants/styles"
 
+import { Feather } from "@expo/vector-icons"
+
 import { loadJobs } from "../../actions/jobs"
 
 class JobsScreen extends React.Component {
+	static navigationOptions = {
+		headerRight: <Text>test</Text>,
+	}
 	componentDidMount() {
 		this.props.dispatchLoadJobs()
 	}
@@ -19,6 +24,7 @@ class JobsScreen extends React.Component {
 	}
 
 	render() {
+		console.log(this.props.jobs)
 		if (!this.props.jobs) {
 			return (
 				<CenteredView>

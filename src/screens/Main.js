@@ -1,4 +1,5 @@
 import React from "react"
+import { connect } from "react-redux"
 import { Platform } from "react-native"
 import { createBottomTabNavigator, createStackNavigator } from "react-navigation"
 
@@ -6,7 +7,7 @@ import { createMaterialBottomTabNavigator } from "react-navigation-material-bott
 
 import { Feather } from "@expo/vector-icons"
 
-import LogoTitle from "../components/LogoTitle"
+import Alarm from "../components/Alarm"
 
 import EventsScreen from "./events/EventsScreen"
 import JobsScreen from "./jobs/JobsScreen"
@@ -14,6 +15,7 @@ import EventDetailScreen from "./eventDetail/EventDetailScreen"
 import JobDetailScreen from "./jobDetail/JobDetailScreen"
 
 import STYLES from "../constants/styles"
+import { getLocalPermissionsStatus } from "../actions/notifications"
 
 const routes = {
 	Events: EventsScreen,
@@ -53,7 +55,7 @@ const options = {
 const TabsBottom = createBottomTabNavigator(routes, options)
 const TabsTop = createMaterialBottomTabNavigator(routes, options)
 
-export default createStackNavigator(
+const StackNavigator = createStackNavigator(
 	{
 		Tabs: {
 			screen: Platform.select({
@@ -61,12 +63,14 @@ export default createStackNavigator(
 				android: TabsTop,
 			}),
 			navigationOptions: ({ navigation }) => {
+				const type = navigation.state.index === 0 ? "events" : "jobs"
 				return {
-					headerTitle: <LogoTitle />,
+					headerTitle: type === "events" ? "Próximos eventos" : "Ofertas de trabajo",
+					headerRight: <Alarm type={type} />,
 					headerBackTitle: "Back",
-					headerTintColor: STYLES.COLORS.WHITE,
+					headerTintColor: STYLES.COLORS.PRIMARY_DARK,
 					headerStyle: {
-						backgroundColor: STYLES.COLORS.WHITE,
+						backgroundColor: STYLES.COLORS.PRIMARY,
 						borderBottomWidth: 1,
 						borderBottomColor: STYLES.COLORS.GREY_LIGHTER,
 					},
@@ -84,3 +88,28 @@ export default createStackNavigator(
 		headerLayoutPreset: "center",
 	},
 )
+
+class MainScreen extends React.Component {
+	componentDidMount() {
+		this.props.dispatchGetLocalPermissionsStatus()
+	}
+
+	render() {
+		return <StackNavigator />
+	}
+}
+
+function mapStateToProps(state) {
+	return {}
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		dispatchGetLocalPermissionsStatus: () => dispatch(getLocalPermissionsStatus()),
+	}
+}
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)(MainScreen)
