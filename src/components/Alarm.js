@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
-import { TouchableHighlight, StyleSheet, ActivityIndicator } from "react-native"
+import { Alert, TouchableHighlight, StyleSheet, ActivityIndicator } from "react-native"
 import { Permissions } from "expo"
 import { MaterialIcons } from "@expo/vector-icons"
 
@@ -9,6 +9,28 @@ import STYLES from "../constants/styles"
 import { registerForPushNotifications } from "../actions/notifications"
 
 class Alarm extends React.Component {
+	openPushNotificationsAlert = (type, disable) => {
+		console.log(type)
+		const title = `${disable ? "Desactivar" : "Activar"} notificaciones`
+		const message = disable
+			? `Quieres desactivar las notificaciones push para ${
+					type === "events" ? "nuevos eventos" : "nuevas ofertas de trabajo"
+			  }`
+			: `Quieres activar notificaciones push cuando se publica ${
+					type === "events" ? "un nuevo evento" : "una nueva oferta de trabajo"
+			  }?`
+
+		const onPress = () =>
+			disable
+				? this.props.dispatchRegisterForPushNotifications(type, true)
+				: this.getPushNotificationsPermissions()
+
+		Alert.alert(title, message, [
+			{ text: disable ? "Desactivar" : "Activar", onPress },
+			{ text: "Cancel", onPress: () => console.log("Cancel Pressed"), style: "cancel" },
+		])
+	}
+
 	async getPushNotificationsPermissions() {
 		const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS)
 		let finalStatus = existingStatus
@@ -36,8 +58,8 @@ class Alarm extends React.Component {
 			<TouchableHighlight
 				onPress={() =>
 					isGranted
-						? this.props.dispatchRegisterForPushNotifications(this.props.type, true)
-						: this.getPushNotificationsPermissions()
+						? this.openPushNotificationsAlert(this.props.type, true)
+						: this.openPushNotificationsAlert(this.props.type)
 				}
 				style={styles.alarmContainer}
 			>
