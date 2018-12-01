@@ -11,6 +11,13 @@
 			"image": "./assets/splash.png",
 			"backgroundColor": "#FFFFFF"
 		},
-		"icon": "./assets/icon.png"
+		"icon": "./assets/icon.png",
+		"ios": {
+			"bundleIdentifier": "com.marcelkalveram.vlctechhub"
+		},
+		"android": {
+			"package": "com.marcelkalveram.vlctechhub",
+			"permissions": []
+		}
 	}
 }
