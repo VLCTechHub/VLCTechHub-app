@@ -8,10 +8,18 @@ import Event from "../../components/Event"
 import STYLES from "../../constants/styles"
 
 import { loadEvents } from "../../actions/events"
+import { updatePushNotificationStatus } from "../../actions/notifications"
 
 class EventsScreen extends React.Component {
 	componentDidMount() {
 		this.props.dispatchLoadEvents()
+	}
+
+	componentDidUpdate() {
+		const { permissionsLoaded, permissions } = this.props.notifications
+		if (permissionsLoaded && permissions.includes("events")) {
+			this.props.dispatchUpdatePushNotificationStatus("events")
+		}
 	}
 
 	eventSelectedHandler(event) {
@@ -44,12 +52,14 @@ class EventsScreen extends React.Component {
 function mapStateToProps(state) {
 	return {
 		events: getEvents(state.events),
+		notifications: state.notifications,
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
 		dispatchLoadEvents: () => dispatch(loadEvents()),
+		dispatchUpdatePushNotificationStatus: type => dispatch(updatePushNotificationStatus(type)),
 	}
 }
 

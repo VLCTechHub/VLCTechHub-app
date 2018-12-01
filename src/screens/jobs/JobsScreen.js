@@ -10,6 +10,7 @@ import STYLES from "../../constants/styles"
 import { Feather } from "@expo/vector-icons"
 
 import { loadJobs } from "../../actions/jobs"
+import { updatePushNotificationStatus } from "../../actions/notifications"
 
 class JobsScreen extends React.Component {
 	static navigationOptions = {
@@ -19,12 +20,18 @@ class JobsScreen extends React.Component {
 		this.props.dispatchLoadJobs()
 	}
 
+	componentDidUpdate() {
+		const { permissionsLoaded, permissions } = this.props.notifications
+		if (permissionsLoaded && permissions.includes("jobs")) {
+			this.props.dispatchUpdatePushNotificationStatus("jobs")
+		}
+	}
+
 	jobSelectedHandler(job) {
 		this.props.navigation.navigate("JobDetail", { job })
 	}
 
 	render() {
-		console.log(this.props.jobs)
 		if (!this.props.jobs) {
 			return (
 				<CenteredView>
@@ -50,12 +57,14 @@ class JobsScreen extends React.Component {
 function mapStateToProps(state) {
 	return {
 		jobs: getJobs(state.jobs),
+		notifications: state.notifications,
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
 		dispatchLoadJobs: () => dispatch(loadJobs()),
+		dispatchUpdatePushNotificationStatus: type => dispatch(updatePushNotificationStatus(type)),
 	}
 }
 

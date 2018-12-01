@@ -60,13 +60,29 @@ export function registerForPushNotifications(type, unregister = false) {
 export function registerForPushNotificationsLoading() {
 	return {
 		type: types.PUSH_NOTIFICATIONS_REGISTER_LOADING,
-		// payload: status,
 	}
 }
 
 export function registerForPushNotificationsSuccess() {
 	return {
 		type: types.PUSH_NOTIFICATIONS_REGISTER_LOADED,
-		// payload: status,
+	}
+}
+
+export function updatePushNotificationStatus(type) {
+	return async function() {
+		const token = await Notifications.getExpoPushTokenAsync()
+		fetch(`${PUSH_ENDPOINT}/user/${type}`, {
+			method: "PUT",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				token,
+			}),
+		})
+			.then(val => {})
+			.catch(err => {})
 	}
 }
