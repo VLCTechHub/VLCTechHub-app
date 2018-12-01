@@ -26,6 +26,6 @@ export default async function registerForPushNotificationsAsync(type) {
 			token,
 		}),
 	})
-		.then(val => console.log(val))
-		.catch(err => console.log(err))
+		.then(val => {})
+		.catch(err => {})
 }

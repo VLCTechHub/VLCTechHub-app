@@ -10,7 +10,6 @@ import { registerForPushNotifications } from "../actions/notifications"
 
 class Alarm extends React.Component {
 	openPushNotificationsAlert = (type, disable) => {
-		console.log(type)
 		const title = `${disable ? "Desactivar" : "Activar"} notificaciones`
 		const message = disable
 			? `Quieres desactivar las notificaciones push para ${
@@ -27,7 +26,7 @@ class Alarm extends React.Component {
 
 		Alert.alert(title, message, [
 			{ text: disable ? "Desactivar" : "Activar", onPress },
-			{ text: "Cancel", onPress: () => console.log("Cancel Pressed"), style: "cancel" },
+			{ text: "Cancel", onPress: () => {}, style: "cancel" },
 		])
 	}
 
