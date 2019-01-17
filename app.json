@@ -1,6 +1,6 @@
 {
 	"expo": {
-		"sdkVersion": "30.0.0",
+		"sdkVersion": "31.0.0",
 		"name": "VLCTechHub app",
 		"slug": "vlctechhub-app",
 		"privacy": "public",
@@ -17,6 +17,7 @@
 		},
 		"android": {
 			"package": "com.marcelkalveram.vlctechhub",
+			"versionCode": 2,
 			"permissions": []
 		}
 	}
