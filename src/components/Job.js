@@ -1,6 +1,5 @@
 import React from "react"
 import { View, ScrollView, TouchableHighlight, Dimensions } from "react-native"
-import { Feather } from "@expo/vector-icons"
 
 import { Item, ItemData } from "./Item"
 import { Meta, Subtitle, Tags, Tag, TagText } from "./Content"
@@ -11,8 +10,7 @@ export default props => {
 	var { width } = Dimensions.get("window")
 	return (
 		<Item white={props.index % 2 === 0}>
-			<Feather name="briefcase" size={25} style={{ color: STYLES.COLORS.GREY_LIGHT }} />
-			<ItemData>
+			<ItemData noPadding>
 				<TouchableHighlight onPress={props.handleClick} underlayColor="transparent">
 					<View>
 						<Meta>{props.job.company.name}</Meta>

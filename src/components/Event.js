@@ -1,6 +1,5 @@
 import React from "react"
-import { TouchableHighlight } from "react-native"
-import { Feather } from "@expo/vector-icons"
+import { TouchableHighlight, Image } from "react-native"
 
 import { Item, ItemData } from "./Item"
 import { Meta, Subtitle, Tags, Tag } from "./Content"
@@ -14,7 +13,14 @@ export default props => {
 	return (
 		<TouchableHighlight onPress={props.handleClick} underlayColor={STYLES.COLORS.GREY_LIGHTER}>
 			<Item white={props.index % 2 === 0}>
-				<Feather name="calendar" size={25} style={{ color: STYLES.COLORS.GREY_LIGHT }} />
+				<Image
+					style={{ width: 50, height: 50, borderRadius: 24 }}
+					source={{
+						uri: `https://res.cloudinary.com/vlctechhub/image/twitter_name/w_240/${props.event.hashtag.slice(
+							1,
+						)}.jpg`,
+					}}
+				/>
 				<ItemData>
 					<Meta>{date}</Meta>
 					<Subtitle ellipsizeMode="tail" numberOfLines={1}>

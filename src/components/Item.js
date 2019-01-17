@@ -26,7 +26,7 @@ export const ItemData = props => (
 		style={{
 			flex: 1,
 			flexDirection: "column",
-			paddingLeft: STYLES.SPACING.MAJOR,
+			paddingLeft: props.noPadding ? 0 : STYLES.SPACING.MAJOR,
 		}}
 	>
 		{props.children}

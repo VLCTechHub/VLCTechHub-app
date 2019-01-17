@@ -67,7 +67,7 @@ const StackNavigator = createStackNavigator(
 				return {
 					headerTitle: type === "events" ? "Próximos eventos" : "Ofertas de trabajo",
 					headerRight: <Alarm type={type} />,
-					headerBackTitle: "Back",
+					headerBackTitle: null,
 					headerTintColor: STYLES.COLORS.PRIMARY_DARK,
 					headerStyle: {
 						backgroundColor: STYLES.COLORS.PRIMARY,

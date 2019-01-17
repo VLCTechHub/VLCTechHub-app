@@ -1,8 +1,16 @@
 import React from "react"
-import { SafeAreaView, Animated, Linking, StyleSheet, Platform } from "react-native"
+import {
+	SafeAreaView,
+	Animated,
+	Linking,
+	StyleSheet,
+	ScrollView,
+	Image,
+	TouchableHighlight,
+} from "react-native"
 import { DetailView, Title, Subtitle, Description } from "../../components/Content"
-import AnimatedHeader from "../../components/AnimatedHeader"
 import Button from "../../components/Button"
+import { Feather } from "@expo/vector-icons"
 
 import STYLES from "../../constants/styles"
 
@@ -12,8 +20,29 @@ const headerRatio = 16 / 9
 const headerHeight = STYLES.WIDTH / headerRatio
 
 export default class EventDetailScreen extends React.Component {
-	static navigationOptions = {
-		header: null,
+	static navigationOptions = ({ navigation }) => {
+		return {
+			headerStyle: {
+				backgroundColor: STYLES.COLORS.PRIMARY_LIGHT,
+			},
+			headerTintColor: STYLES.COLORS.PRIMARY_DARK,
+			headerTitleStyle: {
+				fontWeight: "bold",
+			},
+			headerRight: (
+				<TouchableHighlight
+					onPress={() => Linking.openURL(navigation.getParam("event").link)}
+					underlayColor="transparent"
+				>
+					<Feather
+						style={{ color: STYLES.COLORS.PRIMARY_DARK, marginRight: 12 }}
+						name="external-link"
+						size={24}
+					/>
+				</TouchableHighlight>
+			),
+			title: navigation.getParam("event").hashtag,
+		}
 	}
 
 	scrollY = new Animated.Value(0)
@@ -27,30 +56,17 @@ export default class EventDetailScreen extends React.Component {
 		const date = dateFormatted(event.date)
 		return (
 			<SafeAreaView style={styles.scrollViewContainer}>
-				<AnimatedHeader
-					headerHeight={headerHeight}
-					scrollY={this.scrollY}
-					headerTitle={event.hashtag}
-					headerImage={require("../../../assets/talk.jpg")}
-					onBackPress={() => this.props.navigation.goBack()}
-					externalLinkPress={event.link && (() => this.buttonPressHandler(event))}
-				/>
-				<Animated.ScrollView
-					style={styles.scrollView}
-					contentContainerStyle={styles.scrollViewContent}
-					scrollEventThrottle={16}
-					onScroll={Animated.event(
-						[
-							{
-								nativeEvent: {
-									contentOffset: { y: this.scrollY },
-								},
-							},
-						],
-						{ useNativeDriver: false },
-					)}
-				>
+				<ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollViewContent}>
 					<DetailView>
+						<Image
+							style={styles.image}
+							source={{
+								uri: `https://res.cloudinary.com/vlctechhub/image/twitter_name/w_240/${event.hashtag.slice(
+									1,
+								)}.jpg`,
+							}}
+						/>
+
 						<Title>{event.title}</Title>
 						<Subtitle>{date}</Subtitle>
 						<Description>{event.description}</Description>
@@ -58,7 +74,7 @@ export default class EventDetailScreen extends React.Component {
 							<Button onPress={() => this.buttonPressHandler(event)}>Más información</Button>
 						) : null}
 					</DetailView>
-				</Animated.ScrollView>
+				</ScrollView>
 			</SafeAreaView>
 		)
 	}
@@ -73,6 +89,13 @@ const styles = StyleSheet.create({
 		backgroundColor: STYLES.COLORS.WHITE,
 	},
 	scrollViewContent: {
-		paddingTop: headerHeight,
+		// paddingTop: headerHeight,
+	},
+	image: {
+		width: 100,
+		height: 100,
+		borderRadius: 50,
+		marginBottom: STYLES.SPACING.MAJOR,
+		marginTop: STYLES.SPACING.MINOR,
 	},
 })
