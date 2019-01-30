@@ -22,11 +22,13 @@ export default props => {
 					}}
 				/>
 				<ItemData>
-					<Meta>{date}</Meta>
+					<Meta style={{ marginBottom: STYLES.SPACING.TINY }}>{date}</Meta>
 					<Subtitle ellipsizeMode="tail" numberOfLines={1}>
 						{props.event.title}
 					</Subtitle>
-					<Tags>{props.event.hashtag ? <Tag last>{props.event.hashtag}</Tag> : null}</Tags>
+					<Tags style={{ marginTop: STYLES.SPACING.TINY }}>
+						{props.event.hashtag ? <Tag last>{props.event.hashtag}</Tag> : null}
+					</Tags>
 				</ItemData>
 			</Item>
 		</TouchableHighlight>

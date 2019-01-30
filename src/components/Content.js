@@ -1,21 +1,28 @@
 import React from "react"
-import { View, Text } from "react-native"
+import { Platform, View, Text } from "react-native"
 import STYLES from "../constants/styles"
+
+import { iOSUIKit, material } from "react-native-typography"
 
 export const DetailView = props => <View style={{ padding: STYLES.SPACING.MAJOR }}>{props.children}</View>
 
 export const Title = props => (
-	<Text style={{ fontSize: STYLES.FONTS.TITLE, marginBottom: STYLES.SPACING.MINOR }}>{props.children}</Text>
+	<Text
+		style={{
+			...Platform.select({ ios: iOSUIKit.largeTitleEmphasized, android: material.display1 }),
+			marginBottom: STYLES.SPACING.MINOR,
+		}}
+	>
+		{props.children}
+	</Text>
 )
 
 export const Subtitle = props => (
 	<Text
 		{...props}
 		style={{
-			fontSize: STYLES.FONTS.SUBTITLE,
-			fontWeight: STYLES.BOLD,
-			lineHeight: STYLES.LINE_HEIGHT,
-			color: STYLES.COLORS.GREY,
+			...Platform.select({ ios: iOSUIKit.bodyEmphasized, android: material.subheading }),
+			...props.style,
 		}}
 	>
 		{props.children}
@@ -25,9 +32,8 @@ export const Subtitle = props => (
 export const Meta = props => (
 	<Text
 		style={{
-			fontSize: STYLES.FONTS.TEXT,
-			lineHeight: STYLES.LINE_HEIGHT,
-			color: STYLES.COLORS.SECONDARY_LIGHT,
+			...Platform.select({ ios: iOSUIKit.footnote, android: material.body1 }),
+			...props.style,
 		}}
 	>
 		{props.children}
@@ -37,9 +43,8 @@ export const Meta = props => (
 export const Description = props => (
 	<Text
 		style={{
-			fontSize: STYLES.FONTS.SUBTITLE,
-			lineHeight: STYLES.LINE_HEIGHT,
-			marginTop: STYLES.SPACING.MAJOR,
+			...Platform.select({ ios: iOSUIKit.body, android: material.subheading }),
+			...props.style,
 		}}
 	>
 		{props.children}
@@ -51,7 +56,7 @@ export const Tags = props => (
 		style={{
 			flexDirection: "row",
 			marginRight: STYLES.SPACING.MINOR,
-			marginTop: (STYLES.SPACING.MINOR / 3) * 2,
+			...props.style,
 		}}
 	>
 		{props.children}
@@ -61,7 +66,6 @@ export const Tags = props => (
 export const Tag = props => (
 	<View
 		style={{
-			marginBottom: STYLES.SPACING.MINOR,
 			borderRightWidth: props.last ? 0 : 1,
 			borderRightColor: STYLES.COLORS.GREY_LIGHTER,
 			marginRight: STYLES.SPACING.MINOR,
@@ -72,7 +76,7 @@ export const Tag = props => (
 	>
 		<Text
 			style={{
-				fontSize: STYLES.FONTS.TEXT,
+				...iOSUIKit.footnote,
 				color: STYLES.COLORS.GREY_LIGHT,
 			}}
 		>
@@ -86,6 +90,7 @@ export const Callout = props => (
 		style={{
 			padding: STYLES.SPACING.MAJOR,
 			marginTop: STYLES.SPACING.MINOR,
+			marginBottom: STYLES.SPACING.MAJOR,
 			marginLeft: -STYLES.SPACING.MAJOR,
 			width: STYLES.WIDTH,
 			backgroundColor: STYLES.COLORS.PRIMARY_LIGHT,
@@ -93,9 +98,7 @@ export const Callout = props => (
 	>
 		<Text
 			style={{
-				fontSize: STYLES.FONTS.TEXT,
-				fontWeight: STYLES.BOLD,
-				lineHeight: STYLES.LINE_HEIGHT,
+				...Platform.select({ ios: iOSUIKit.footnote, android: material.body1 }),
 				color: STYLES.COLORS.PRIMARY_DARK,
 			}}
 		>
@@ -103,8 +106,7 @@ export const Callout = props => (
 		</Text>
 		<Text
 			style={{
-				fontSize: STYLES.FONTS.TEXT,
-				lineHeight: (STYLES.LINE_HEIGHT / 3) * 2,
+				...Platform.select({ ios: iOSUIKit.footnote, android: material.body2 }),
 				color: STYLES.COLORS.PRIMARY_DARK,
 			}}
 		>

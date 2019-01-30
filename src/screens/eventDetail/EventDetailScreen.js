@@ -6,10 +6,12 @@ import {
 	StyleSheet,
 	ScrollView,
 	Image,
+	View,
 	TouchableHighlight,
 } from "react-native"
 import { DetailView, Title, Subtitle, Description } from "../../components/Content"
 import Button from "../../components/Button"
+import Divider from "../../components/Divider"
 import { Feather } from "@expo/vector-icons"
 
 import STYLES from "../../constants/styles"
@@ -58,17 +60,20 @@ export default class EventDetailScreen extends React.Component {
 			<SafeAreaView style={styles.scrollViewContainer}>
 				<ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollViewContent}>
 					<DetailView>
-						<Image
+						{/* <Image
 							style={styles.image}
 							source={{
 								uri: `https://res.cloudinary.com/vlctechhub/image/twitter_name/w_240/${event.hashtag.slice(
 									1,
 								)}.jpg`,
 							}}
-						/>
+						/> */}
 
 						<Title>{event.title}</Title>
 						<Subtitle>{date}</Subtitle>
+
+						<Divider />
+
 						<Description>{event.description}</Description>
 						{event.link ? (
 							<Button onPress={() => this.buttonPressHandler(event)}>Más información</Button>

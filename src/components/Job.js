@@ -13,7 +13,7 @@ export default props => {
 			<ItemData noPadding>
 				<TouchableHighlight onPress={props.handleClick} underlayColor="transparent">
 					<View>
-						<Meta>{props.job.company.name}</Meta>
+						<Meta style={{ marginBottom: STYLES.SPACING.TINY }}>{props.job.company.name}</Meta>
 						<Subtitle ellipsizeMode="tail" numberOfLines={1}>
 							{props.job.title}
 						</Subtitle>
@@ -25,7 +25,7 @@ export default props => {
 					horizontal={true}
 					showsHorizontalScrollIndicator={false}
 				>
-					<Tags>
+					<Tags style={{ marginTop: STYLES.SPACING.TINY }}>
 						{props.job.tags &&
 							props.job.tags.map((tag, index) => (
 								<Tag key={index} last={index === props.job.tags.length - 1}>

@@ -7,7 +7,9 @@ export default {
 	HEIGHT: height,
 	SPACING: {
 		MAJOR: 16,
+		MIDDLE: 12,
 		MINOR: 8,
+		TINY: 2,
 	},
 	FONTS: {
 		TITLE: 32,

@@ -1,8 +1,9 @@
 import React from "react"
-import { SafeAreaView, Animated, Linking, StyleSheet } from "react-native"
+import { SafeAreaView, Animated, Linking, StyleSheet, View } from "react-native"
 import { DetailView, Title, Description, Subtitle, Callout } from "../../components/Content"
 import Button from "../../components/Button"
 import AnimatedHeader from "../../components/AnimatedHeader"
+import Divider from "../../components/Divider"
 
 import STYLES from "../../constants/styles"
 
@@ -49,7 +50,16 @@ export default class JobDetailScreen extends React.Component {
 				>
 					<DetailView>
 						<Title>{job.title}</Title>
-						{job.salary ? <Callout>{job.salary}</Callout> : null}
+						<View
+							style={{
+								flexDirection: "row",
+								justifyContent: "space-between",
+							}}
+						>
+							<Subtitle>{job.company.name}</Subtitle>
+							<Subtitle style={{ color: STYLES.COLORS.GREY_LIGHT }}>{job.salary}</Subtitle>
+						</View>
+						<Divider />
 						<Description>{job.description}</Description>
 						{job.link ? (
 							<Button onPress={() => this.buttonPressHandler(job)}>Más información</Button>

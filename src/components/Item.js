@@ -14,7 +14,7 @@ export const Item = props => (
 			justifyContent: "center",
 			alignItems: "center",
 			paddingHorizontal: STYLES.SPACING.MAJOR,
-			paddingVertical: STYLES.SPACING.MINOR,
+			paddingVertical: STYLES.SPACING.MIDDLE,
 		}}
 	>
 		{props.children}
@@ -26,6 +26,7 @@ export const ItemData = props => (
 		style={{
 			flex: 1,
 			flexDirection: "column",
+			justifyContent: "space-around",
 			paddingLeft: props.noPadding ? 0 : STYLES.SPACING.MAJOR,
 		}}
 	>
