@@ -1,5 +1,7 @@
 // Events
 export const EVENTS_LOADED = "EVENTS_LOADED"
+export const DISABLED_EVENTS_LOADED = "DISABLED_EVENTS_LOADED"
+export const DISABLE_EVENT = "DISABLE_EVENT"
 
 // Jobs
 export const JOBS_LOADED = "JOBS_LOADED"
