@@ -9,15 +9,20 @@ import STYLES from "../../constants/styles"
 
 import { loadEvents, loadDisabledEvents, disableEvent } from "../../actions/events"
 import { updatePushNotificationStatus } from "../../actions/notifications"
+import { setReminder, loadReminders } from "../../actions/reminders"
 
 class EventsScreen extends React.Component {
     componentDidMount() {
         this.props.dispatchLoadEvents()
         this.props.dispatchLoadDisabledEvents()
+        this.props.dispatchLoadReminders()
     }
 
-    componentDidUpdate() {
+    componentDidUpdate({ notifications }) {
         const { permissionsLoaded, permissions } = this.props.notifications
+        if (notifications.permissions.includes("events")) {
+            return
+        }
         if (permissionsLoaded && permissions.includes("events")) {
             this.props.dispatchUpdatePushNotificationStatus("events")
         }
@@ -44,8 +49,10 @@ class EventsScreen extends React.Component {
                             key={event.id}
                             event={event}
                             index={index}
+                            hasReminder={this.props.reminders.includes(event.id)}
                             handleClick={() => this.eventSelectedHandler(event)}
                             disableEvent={id => this.props.dispatchDisableEvent(id)}
+                            setReminder={id => this.props.dispatchSetReminder(id)}
                         />
                     ))}
             </ScrollView>
@@ -58,14 +65,17 @@ function mapStateToProps(state) {
         disabled: getDisabled(state.events),
         events: getEvents(state.events),
         notifications: state.notifications,
+        reminders: state.reminders.reminders,
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         dispatchDisableEvent: eventId => dispatch(disableEvent(eventId)),
+        dispatchSetReminder: eventId => dispatch(setReminder(eventId)),
         dispatchLoadEvents: () => dispatch(loadEvents()),
         dispatchLoadDisabledEvents: () => dispatch(loadDisabledEvents()),
+        dispatchLoadReminders: () => dispatch(loadReminders()),
         dispatchUpdatePushNotificationStatus: type => dispatch(updatePushNotificationStatus(type)),
     }
 }
