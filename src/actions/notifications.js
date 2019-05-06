@@ -86,3 +86,16 @@ export function updatePushNotificationStatus(type) {
             .catch(err => {})
     }
 }
+
+export function broadcastIncomingNotification(data) {
+    return {
+        type: types.BROADCAST_INCOMING_NOTIFICATION,
+        payload: data,
+    }
+}
+
+export function resetIncomingNotification(data) {
+    return {
+        type: types.RESET_INCOMING_NOTIFICATION,
+    }
+}

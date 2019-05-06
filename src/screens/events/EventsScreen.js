@@ -8,7 +8,7 @@ import Event from "../../components/Event"
 import STYLES from "../../constants/styles"
 
 import { loadEvents, loadDisabledEvents, disableEvent } from "../../actions/events"
-import { updatePushNotificationStatus } from "../../actions/notifications"
+import { updatePushNotificationStatus, resetIncomingNotification } from "../../actions/notifications"
 import { setReminder, loadReminders } from "../../actions/reminders"
 
 class EventsScreen extends React.Component {
@@ -19,7 +19,18 @@ class EventsScreen extends React.Component {
     }
 
     componentDidUpdate({ notifications }) {
-        const { permissionsLoaded, permissions } = this.props.notifications
+        const { permissionsLoaded, permissions, incomingNotification } = this.props.notifications
+        if (incomingNotification && incomingNotification.type === "jobs") {
+            this.props.navigation.navigate("Jobs")
+        }
+        if (incomingNotification && ["events", "reminders"].includes(incomingNotification.type)) {
+            const event = this.props.events.filter(e => e.id === incomingNotification.id)[0]
+            if (event) {
+                this.props.navigation.navigate("EventDetail", { event })
+                this.props.dispatchResetIncomingNotification()
+            }
+            return
+        }
         if (notifications.permissions.includes("events")) {
             return
         }
@@ -36,7 +47,7 @@ class EventsScreen extends React.Component {
         if (!this.props.events || !this.props.disabled) {
             return (
                 <CenteredView>
-                    <ActivityIndicator />
+                    <ActivityIndicator color={STYLES.COLORS.GREY} />
                 </CenteredView>
             )
         }
@@ -77,6 +88,7 @@ function mapDispatchToProps(dispatch) {
         dispatchLoadDisabledEvents: () => dispatch(loadDisabledEvents()),
         dispatchLoadReminders: () => dispatch(loadReminders()),
         dispatchUpdatePushNotificationStatus: type => dispatch(updatePushNotificationStatus(type)),
+        dispatchResetIncomingNotification: () => dispatch(resetIncomingNotification()),
     }
 }
 
