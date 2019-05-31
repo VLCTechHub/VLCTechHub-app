@@ -5,9 +5,8 @@ import { getJobs } from "../../selectors"
 
 import CenteredView from "../../components/CenteredView"
 import Job from "../../components/Job"
+import EmptyState from "../../components/EmptyState"
 import STYLES from "../../constants/styles"
-
-import { Feather } from "@expo/vector-icons"
 
 import { loadJobs } from "../../actions/jobs"
 import { updatePushNotificationStatus, resetIncomingNotification } from "../../actions/notifications"
@@ -50,9 +49,19 @@ class JobsScreen extends React.Component {
                 </CenteredView>
             )
         }
+
+        const jobs = this.props.jobs
+        if (jobs.length === 0) {
+            return (
+                <EmptyState>
+                    ¡Que pena! Actualmente, no hay ningúna oferta de trabajo en VLCTechHub.
+                </EmptyState>
+            )
+        }
+
         return (
             <ScrollView style={{ backgroundColor: STYLES.COLORS.WHITE }}>
-                {this.props.jobs.map((job, index) => (
+                {jobs.map((job, index) => (
                     <Job
                         key={job.id}
                         job={job}

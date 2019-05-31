@@ -1,24 +1,24 @@
 {
-	"expo": {
-		"sdkVersion": "31.0.0",
-		"name": "VLCTechHub app",
-		"slug": "vlctechhub-app",
-		"privacy": "public",
-		"description": "React Native app consuming the VLCTechHub API",
-		"version": "0.2.0",
-		"githubUrl": "https://github.com/marcelkalveram/vlctechhub-app",
-		"splash": {
-			"image": "./assets/splash.png",
-			"backgroundColor": "#FFFFFF"
-		},
-		"icon": "./assets/icon.png",
-		"ios": {
-			"bundleIdentifier": "com.marcelkalveram.vlctechhub"
-		},
-		"android": {
-			"package": "com.marcelkalveram.vlctechhub",
-			"versionCode": 2,
-			"permissions": []
-		}
-	}
+    "expo": {
+        "sdkVersion": "32.0.0",
+        "name": "VLCTechHub app",
+        "slug": "vlctechhub-app",
+        "privacy": "public",
+        "description": "React Native app consuming the VLCTechHub API",
+        "version": "0.2.0",
+        "githubUrl": "https://github.com/marcelkalveram/vlctechhub-app",
+        "splash": {
+            "image": "./assets/splash.png",
+            "backgroundColor": "#FFFFFF"
+        },
+        "icon": "./assets/icon.png",
+        "ios": {
+            "bundleIdentifier": "com.marcelkalveram.vlctechhub"
+        },
+        "android": {
+            "package": "com.marcelkalveram.vlctechhub",
+            "versionCode": 2,
+            "permissions": []
+        }
+    }
 }

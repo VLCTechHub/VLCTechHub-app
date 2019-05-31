@@ -15,6 +15,7 @@ export function toggleReminder(eventId) {
         }
         await AsyncStorage.setItem(LOCAL_REMINDERS_KEY, JSON.stringify(reminders))
         dispatch(loadRemindersCompleted(reminders))
+        dispatch(toggleReminderLoading(eventId))
     }
 }
 
@@ -35,6 +36,7 @@ export function loadRemindersCompleted(reminders) {
 
 export function setReminder(eventId, unregister = false) {
     return async function(dispatch) {
+        dispatch(toggleReminderLoading(eventId))
         const token = await Notifications.getExpoPushTokenAsync()
 
         fetch(`${PUSH_ENDPOINT}/user/reminders`, {
@@ -55,6 +57,14 @@ export function setReminder(eventId, unregister = false) {
             .catch(err => {
                 console.log("error saving reminder", err)
                 dispatch(loadReminders())
+                dispatch(toggleReminderLoading(eventId))
             })
+    }
+}
+
+export function toggleReminderLoading(reminderId) {
+    return {
+        type: types.LOCAL_REMINDERS_LOADING,
+        payload: reminderId,
     }
 }

@@ -4,6 +4,7 @@ import { ScrollView, ActivityIndicator } from "react-native"
 import { getDisabled, getEvents } from "../../selectors"
 
 import CenteredView from "../../components/CenteredView"
+import EmptyState from "../../components/EmptyState"
 import Event from "../../components/Event"
 import STYLES from "../../constants/styles"
 
@@ -51,21 +52,25 @@ class EventsScreen extends React.Component {
                 </CenteredView>
             )
         }
+        const events = this.props.events.filter(e => !this.props.disabled.includes(e.id))
+        if (events.length === 0) {
+            return <EmptyState>¡Que pena! Actualmente, no hay ningún evento en VLCTechHub.</EmptyState>
+        }
+
         return (
             <ScrollView style={{ backgroundColor: STYLES.COLORS.WHITE }}>
-                {this.props.events
-                    .filter(e => !this.props.disabled.includes(e.id))
-                    .map((event, index) => (
-                        <Event
-                            key={event.id}
-                            event={event}
-                            index={index}
-                            hasReminder={this.props.reminders.includes(event.id)}
-                            handleClick={() => this.eventSelectedHandler(event)}
-                            disableEvent={id => this.props.dispatchDisableEvent(id)}
-                            setReminder={id => this.props.dispatchSetReminder(id)}
-                        />
-                    ))}
+                {events.map((event, index) => (
+                    <Event
+                        key={event.id}
+                        event={event}
+                        index={index}
+                        hasReminder={this.props.reminders.includes(event.id)}
+                        isReminderLoading={this.props.remindersLoading.includes(event.id)}
+                        handleClick={() => this.eventSelectedHandler(event)}
+                        disableEvent={id => this.props.dispatchDisableEvent(id)}
+                        setReminder={id => this.props.dispatchSetReminder(id)}
+                    />
+                ))}
             </ScrollView>
         )
     }
@@ -77,6 +82,7 @@ function mapStateToProps(state) {
         events: getEvents(state.events),
         notifications: state.notifications,
         reminders: state.reminders.reminders,
+        remindersLoading: state.reminders.loading,
     }
 }
 
