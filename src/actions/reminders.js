@@ -1,6 +1,6 @@
 import * as types from "./types"
 import { AsyncStorage, Alert } from "react-native"
-import { Notifications } from "expo"
+import { Notifications, Permissions } from "expo"
 import { PUSH_ENDPOINT } from "../constants/api"
 import { LOCAL_REMINDERS_KEY } from "../constants/asyncStorage"
 
@@ -37,7 +37,21 @@ export function loadRemindersCompleted(reminders) {
 export function setReminder(eventId, unregister = false) {
     return async function(dispatch) {
         dispatch(toggleReminderLoading(eventId))
+
+        const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS)
+        let finalStatus = existingStatus
+
+        if (existingStatus !== "granted") {
+            const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS)
+            finalStatus = status
+        }
+        if (finalStatus !== "granted") {
+            dispatch(toggleReminderLoading(eventId))
+            return
+        }
+
         const token = await Notifications.getExpoPushTokenAsync()
+        console.log(token)
 
         fetch(`${PUSH_ENDPOINT}/user/reminders`, {
             method: unregister ? "DELETE" : "POST",

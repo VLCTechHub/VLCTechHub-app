@@ -1,7 +1,7 @@
 import React from "react"
 import { Asset, AppLoading, Constants, Notifications } from "expo"
 import { connect } from "react-redux"
-import { ScrollView, SafeAreaView, Platform, AsyncStorage, Linking, Text } from "react-native"
+import { View, SafeAreaView, Platform, AsyncStorage, Linking, Text } from "react-native"
 import {
     createBottomTabNavigator,
     createStackNavigator,
@@ -28,6 +28,7 @@ import PrivacyNavigator from "./privacy/PrivacyNavigator"
 import STYLES from "../constants/styles"
 import { getLocalPermissionsStatus, broadcastIncomingNotification } from "../actions/notifications"
 import { Meta } from "../components/Content"
+import MaterialIcons from "@expo/vector-icons/MaterialIcons"
 
 const routes = {
     Events: EventsScreen,
@@ -136,16 +137,22 @@ const DrawerNavigator = createDrawerNavigator(
     {
         drawerBackgroundColor: STYLES.COLORS.GREY_LIGHTEST,
         contentComponent: props => (
-            <ScrollView>
-                <SafeAreaView
-                    style={{
-                        flex: 1,
-                        height: STYLES.HEIGHT,
-                        flexDirection: "column",
-                        justifyContent: "space-between",
-                    }}
-                    forceInset={{ top: "always", horizontal: "never" }}
-                >
+            <SafeAreaView
+                style={{
+                    flex: 1,
+                    height: STYLES.HEIGHT,
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                }}
+                forceInset={{ top: "always", horizontal: "never" }}
+            >
+                <View>
+                    <MaterialIcons
+                        name={"close"}
+                        size={24}
+                        style={{ margin: STYLES.SPACING.MIDDLE }}
+                        onPress={() => props.navigation.toggleDrawer()}
+                    />
                     <DrawerItems
                         {...props} // make sure all the regular stuff gets passed down a self-defined CustomDrawer
                         onItemPress={({ route, focused }) => {
@@ -161,18 +168,18 @@ const DrawerNavigator = createDrawerNavigator(
                             return props.onItemPress({ route, focused })
                         }}
                     />
-                    <Meta
-                        style={{
-                            // fontFamily: STYLES.FONTS.TEXT,
-                            color: STYLES.COLORS.GREY_LIGHT,
-                            marginBottom: STYLES.SPACING.MAJOR,
-                            marginLeft: STYLES.SPACING.MAJOR,
-                        }}
-                    >
-                        Copyright © 2019 Marcel Kalveram
-                    </Meta>
-                </SafeAreaView>
-            </ScrollView>
+                </View>
+                <Meta
+                    style={{
+                        // fontFamily: STYLES.FONTS.TEXT,
+                        color: STYLES.COLORS.GREY_LIGHT,
+                        marginBottom: STYLES.SPACING.MAJOR,
+                        marginLeft: STYLES.SPACING.MAJOR,
+                    }}
+                >
+                    Copyright © 2019 Marcel Kalveram
+                </Meta>
+            </SafeAreaView>
         ),
         contentOptions: {
             activeBackgroundColor: STYLES.COLORS.PRIMARY_LIGHT,
@@ -188,7 +195,7 @@ const DrawerNavigator = createDrawerNavigator(
                 marginLeft: 0,
             },
             onItemPress: route => {
-                console.log(route)
+                // console.log(route)
             },
         },
     },
@@ -218,6 +225,8 @@ class MainScreen extends React.Component {
     async _cacheResourcesAsync() {
         const images = [
             require("../../assets/onboarding-valencia.jpg"),
+            require("../../assets/onboarding-events.jpg"),
+            require("../../assets/onboarding-work.jpg"),
             require("../../assets/splash-transparent.png"),
         ]
 

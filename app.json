@@ -5,7 +5,7 @@
         "slug": "vlctechhub-app",
         "privacy": "public",
         "description": "React Native app consuming the VLCTechHub API",
-        "version": "0.2.0",
+        "version": "0.3.0",
         "githubUrl": "https://github.com/marcelkalveram/vlctechhub-app",
         "splash": {
             "image": "./assets/splash.png",
@@ -17,7 +17,7 @@
         },
         "android": {
             "package": "com.marcelkalveram.vlctechhub",
-            "versionCode": 2,
+            "versionCode": 3,
             "permissions": []
         }
     }

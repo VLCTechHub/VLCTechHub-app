@@ -10,7 +10,6 @@ export default function remindersReducer(state = { reminders: [], loading: [] },
             const loading = state.loading.includes(action.payload)
                 ? state.loading.filter(item => item !== action.payload)
                 : state.loading.concat([action.payload])
-            console.log(loading)
             return Object.assign({}, state, {
                 loading,
             })
