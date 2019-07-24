@@ -1,7 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
 import { Alert, TouchableHighlight, StyleSheet, ActivityIndicator } from "react-native"
-import { Permissions } from "expo"
+import * as Permissions from "expo-permissions"
 import { MaterialIcons } from "@expo/vector-icons"
 
 import STYLES from "../constants/styles"

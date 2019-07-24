@@ -1,6 +1,6 @@
 {
     "expo": {
-        "sdkVersion": "32.0.0",
+        "sdkVersion": "33.0.0",
         "name": "VLCTechHub app",
         "slug": "vlctechhub-app",
         "privacy": "public",

@@ -1,5 +1,7 @@
 import React from "react"
-import { Asset, AppLoading, Constants, Notifications } from "expo"
+import { AppLoading, Notifications } from "expo"
+import { Asset } from 'expo-asset'
+import Constants from 'expo-constants'
 import { connect } from "react-redux"
 import { View, SafeAreaView, Platform, AsyncStorage, Linking, Text } from "react-native"
 import {

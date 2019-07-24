@@ -1,6 +1,7 @@
 import * as types from "./types"
 import { AsyncStorage, Alert } from "react-native"
-import { Notifications, Permissions } from "expo"
+import { Notifications } from "expo"
+import * as Permissions from "expo-permissions"
 import { PUSH_ENDPOINT } from "../constants/api"
 import { LOCAL_REMINDERS_KEY } from "../constants/asyncStorage"
 
