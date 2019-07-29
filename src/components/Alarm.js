@@ -55,6 +55,7 @@ class Alarm extends React.Component {
         const isGranted = this.props.notifications.permissions.includes(this.props.type)
         return (
             <TouchableHighlight
+                underlayColor="transparent"
                 onPress={() =>
                     isGranted
                         ? this.openPushNotificationsAlert(this.props.type, true)
