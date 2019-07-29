@@ -1,7 +1,7 @@
 import React from "react"
 import { AppLoading, Notifications } from "expo"
-import { Asset } from 'expo-asset'
-import Constants from 'expo-constants'
+import { Asset } from "expo-asset"
+import Constants from "expo-constants"
 import { connect } from "react-redux"
 import { View, SafeAreaView, Platform, AsyncStorage, Linking, Text } from "react-native"
 import {
@@ -206,7 +206,7 @@ const DrawerNavigator = createDrawerNavigator(
 class MainScreen extends React.Component {
     state = {
         showOnboardingLoading: true,
-        showOnboarding: false,
+        showOnboarding: true,
         isReady: false,
     }
     componentDidMount() {
@@ -214,7 +214,7 @@ class MainScreen extends React.Component {
         Notifications.addListener(this.handleNotification)
         AsyncStorage.getItem("onboardingPlayed", (err, result) => {
             this.setState({ showOnboardingLoading: false })
-            this.setState({ showOnboarding: result === "true" ? false : true })
+            // this.setState({ showOnboarding: result === "true" ? false : true })
         })
     }
 
