@@ -22,7 +22,7 @@ export default class OnboardingScreen extends React.Component {
 
     render() {
         return (
-            <View style={{ flex: 1, ...StyleSheet.absoluteFill }}>
+            <View style={{ flex: 1, ...StyleSheet.absoluteFill, backgroundColor: "white" }}>
                 <Animated.Image
                     resizeMode="cover"
                     style={{
