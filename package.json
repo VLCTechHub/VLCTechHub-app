@@ -30,7 +30,7 @@
         "react": "16.8.3",
         "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
         "react-native-onboarding-swiper": "^1.1.0",
-        "react-native-paper": "^2.0.1",
+        "react-native-paper": "^2.16.0",
         "react-native-typography": "^1.4.1",
         "react-navigation": "~2.9.3",
         "react-navigation-material-bottom-tabs": "^0.4.0",
