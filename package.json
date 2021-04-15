@@ -3,7 +3,7 @@
     "version": "0.3.0",
     "private": true,
     "devDependencies": {
-        "jest-expo": "^33.0.0",
+        "jest-expo": "^41.0.0",
         "react-native-scripts": "^2.0.1",
         "react-test-renderer": "16.3.1"
     },
