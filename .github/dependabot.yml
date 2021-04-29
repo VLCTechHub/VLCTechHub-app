@@ -1,0 +1,46 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "04:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: expo
+    versions:
+    - 40.0.1
+    - 41.0.0
+  - dependency-name: expo-asset
+    versions:
+    - 8.2.2
+    - 8.3.1
+  - dependency-name: react-redux
+    versions:
+    - 7.2.2
+    - 7.2.3
+  - dependency-name: whatwg-fetch
+    versions:
+    - 3.5.0
+    - 3.6.1
+  - dependency-name: expo-constants
+    versions:
+    - 10.0.1
+  - dependency-name: expo-permissions
+    versions:
+    - 11.0.0
+  - dependency-name: react-test-renderer
+    versions:
+    - 17.0.1
+  - dependency-name: lodash
+    versions:
+    - 4.17.20
+  - dependency-name: handlebars
+    versions:
+    - 4.7.6
+  - dependency-name: jest-expo
+    versions:
+    - 34.0.1
+  - dependency-name: redux
+    versions:
+    - 4.0.5
